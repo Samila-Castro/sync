@@ -9,7 +9,7 @@ export default function Dashboard() {
     const [thumbnail, setThumbnail] = useState(null);
     const [inputKey, setInputKey] = useState('qwe');
 
-    const userName = localStorage.getItem('userName');
+    const userName = localStorage.getItem('user');
 
     const socket = useMemo(() => socketio('http://localhost:3333',
      { transports : ['websocket'] }), 
@@ -24,7 +24,6 @@ export default function Dashboard() {
     useEffect(()=>{
       async function loadFiles(){
           const response = await api.get('/files');
-          console.log(response.data);
           setFiles(response.data) 
       }
       loadFiles();
@@ -54,7 +53,7 @@ export default function Dashboard() {
 
   return (
     <>
-    
+    <h2>Hi, {userName}</h2>
     <ul className="file-list">
         {files.map(file =>(
             <li key={file.name}>
